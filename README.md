@@ -6,7 +6,7 @@ Love**is**bold
     - Indented item
     - Indented item
 - Fourth item
-<ul>
+<ul style="color-blue">
   <li>First item</li>
   <li>Second item</li>
   <li>Third item
