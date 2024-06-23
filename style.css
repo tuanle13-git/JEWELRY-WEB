@@ -1,0 +1,116 @@
+/*xử lý tỉ lệ hình ảnh và hình ảnh*/
+.responsive-square {
+width: 100%; 
+position: relative;
+padding-top: 125%; 
+overflow: hidden;
+}
+
+.responsive-square img {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover; /* Ensures the image covers the container while maintaining its aspect ratio */
+}
+* trirongfont{
+    font-family: "Trirong", serif !important ;
+  }
+
+/**/
+.titleimgbottom {
+position: absolute;
+bottom: 0;
+left:0 ;
+right: 0;
+color: black;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+/**/
+.addicon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: blanchedalmond;
+    color: black;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 12px;
+    padding: 4px 8px;
+    font-family: "brandon-grotesque", sans-serif !important;
+    font-size:  14px;
+    }
+.saleicon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: blanchedalmond;
+    color: black;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 12px;
+    padding: 4px 8px;
+    font-family: "brandon-grotesque", sans-serif !important;
+    font-size:  12px;
+}
+
+
+
+.slidecontainer {
+    display: flex;
+    flex-wrap: nowrap !important; /* Cho phép các phần tử tràn khi không còn không gian đủ */
+    overflow-x: auto;
+    padding: 0 !important;
+}
+.slidecontainer::-webkit-scrollbar {
+    display: none;
+  }
+  
+.product {
+   
+    
+    padding-left: 0 !important; /* Đặt kích thước của mỗi phần tử */
+
+    ; /* Khoảng cách giữa các phần tử */
+}
+.div-img {
+    width: 100%; 
+    position: relative;
+    padding-top: 125%; 
+    overflow: hidden;
+    }
+    .div-img img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 83%;
+        object-fit: cover; /* Ensures the image covers the container while maintaining its aspect ratio */
+        }
+        
+.btn-slide {
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    text-align: center;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 14px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 8px;
+    -webkit-box-pack: start;
+    justify-content: start;
+    height: 54px;
+    width: 54px;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px;
+}
