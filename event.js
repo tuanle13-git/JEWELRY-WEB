@@ -61,16 +61,6 @@ $(document).ready(function(){
 });
   // /changingimg
 
-    // titlebottom 
-    $(".titlebottom").on({
-      mouseenter: function() {
-          $(this).find('.titleimgbottom').css({'background-color':'rgba(0, 0, 0, 0.6)', 'color':'white'});
-      },
-      mouseleave: function() {
-          // Sử dụng giá trị mặc định mà bạn mong muốn
-          $(this).find('.titleimgbottom').css({'background-color': '', 'color': 'black'});
-      }
-  });
   
 
     // /titlebottom 
@@ -140,9 +130,14 @@ $(document).ready(function(){
   });
   
   
-    ///
-
+    /// getheight of id
+    let topInt = $(".fixedtopint1").innerHeight()
+    console.log(topInt)
+    console.log("a")
+    $(".fixedtopint2").css("top",topInt+1+"px")
+    let offsetl = $(".needoffset").offset().left + "px";
+    $(".absolutem").css("padding-left",offsetl)
 });
 
 
-
+    

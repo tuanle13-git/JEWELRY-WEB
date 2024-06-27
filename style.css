@@ -28,9 +28,31 @@ color: black;
 display: flex;
 justify-content: center;
 align-items: center;
+margin: 0 !important;
 
 }
-
+.titlebottom:hover .titleimgbottom{
+    background-color:rgb(0, 0, 0);
+    color : rgb(255, 255, 255);
+    
+}
+::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform: scaleX(0);
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+  }
+.titlebottom:hover .titleimgbottom h6::before{
+    transform: scaleX(1);
+      
+}
 /**/
 .addicon {
     position: absolute;
@@ -80,6 +102,11 @@ align-items: center;
 
     ; /* Khoảng cách giữa các phần tử */
 }
+.product:hover {
+    filter: grayscale(0);
+    transform: scale(1.001);
+    box-shadow: 2px 2px 5px grey, -2px -2px 5px grey;
+  }
 .div-img {
     width: 100%; 
     position: relative;
@@ -113,4 +140,12 @@ align-items: center;
     width: 54px;
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px;
+}
+.borderbuild {
+    border: 1px solid;
+    border-right: hidden;
+}
+
+body {
+    font-family: 'Be Vietnam' !important;
 }
