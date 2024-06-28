@@ -137,6 +137,32 @@ $(document).ready(function(){
     $(".fixedtopint2").css("top",topInt+1+"px")
     let offsetl = $(".needoffset").offset().left + "px";
     $(".absolutem").css("padding-left",offsetl)
+
+    //ajax 
+    $('.formDB').on('submit', function(event){
+      var phpSiteBack = $(this).attr('id')+'.php';
+      console.log(phpSiteBack);
+      event.preventDefault(); // Ngăn chặn form submit truyền thống
+      var formData = {};
+      $(this).find('input').each(function(){
+        var id = $(this).attr('name');
+        var value = $(this).val();
+        formData[id] = value;
+      });
+                // Duyệt qua tất cả các input trong form và thêm dữ liệu vào đối tượng
+               
+      $.ajax({
+          url: phpSiteBack,
+          type: 'POST',
+          data: formData,//JSON.stringify(formData),
+          success: function(response){
+              $('#result').html(response);
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+              $('#result').html('<p style="color: red;">Error: ' + textStatus + ' - ' + errorThrown + '</p>');
+          }
+      });
+  });
 });
 
 
