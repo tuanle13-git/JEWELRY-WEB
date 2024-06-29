@@ -1,6 +1,7 @@
 <?php
 class db {
     protected $conn;
+    public $last_id;
 
     function __construct() {
         $servername = "localhost";  // Tên máy chủ MySQL (thường là localhost nếu chạy local)
@@ -26,6 +27,9 @@ class db {
         if ($result === FALSE) {
             // Xử lý lỗi hoặc ghi log
             echo "Lỗi truy vấn: " . $this->conn->error;
+        }else
+        {
+            $this->last_id = $this->conn->insert_id;
         }
 
         return $result;
