@@ -207,7 +207,41 @@ $(document).ready(function(){
     }
     
   } );
+  function productrp(){
+    $(".product").find('.product_checkboxz:first').prop( "checked", true ); 
+    $(".product").find('.product_checkboxz:first').each(function(){
+      checkedproduct($(this))
+    })
+  }
  
+  productrp();
+
+  function checkedproduct(lets){
+    if(lets.is(':checked')){
+      var img = lets.parents(".product").find('img');
+     
+      img.attr('src', lets.data('src')) ;
+      console.log(img.attr('class'));
+      console.log(lets.data('name'));
+      img.data('imgchange',lets.data('imgchange')) ;
+      var p_name = lets.parents(".product").find('.metal_stone_name');
+      p_name.html(lets.data('name'));
+    }
+    
+  }
+  $( ".product_checkboxz" ).on( "click", function() {
+    console.log($(this).data('src'));
+    if($(this).is(':checked')){
+      var img = $(this).parents(".product").find('img');
+     
+      img.attr('src', $(this).data('src')) ;
+      console.log(img.attr('class'));
+      img.data('imgchange',$(this).data('imgchange')) ;
+      var p_name = $(this).parents(".product").find('.metal_stone_name');
+      p_name.html($(this).data('name'));
+    }
+    
+  } );
 });
 
 

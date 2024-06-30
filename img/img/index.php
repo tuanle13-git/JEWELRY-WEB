@@ -7,22 +7,7 @@
 <script>
 $(document).ready(function() {
     $('#DBAdd').submit(function(event) {
-        event.preventDefault(); // Ngăn chặn form submit mặc định
-
-        var formData = new FormData($(this)[0]); // Lấy dữ liệu form
-        $.ajax({
-            url: 'upload.php', // Đường dẫn tới file xử lý PHP
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                $('#result').html(response); // Hiển thị kết quả từ server
-            }
-        });
-        return false;
+       
     });
 });
 </script>

@@ -1,40 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Upload Image via AJAX</title>
-<script>
-function uploadImage() {
-    var fileInput = document.getElementById('imageInput');
-    var file = fileInput.files[0];
-    var formData = new FormData();
-    formData.append('image', file);
+<?php
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'upload.php', true);
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                console.log('Upload successful');
-                console.log(xhr.responseText); // Response from PHP script
-            } else {
-                console.error('Upload failed: ' + xhr.status);
-            }
+    // Check image using getimagesize function and get size
+    // if a valid number is got then uploaded file is an image
+    if (isset($_FILES["image"])) {
+        // directory name to store the uploaded image files
+        // this should have sufficient read/write/execute permissions
+        // if not already exists, please create it in the root of the
+        // project folder
+        $targetDir = "uploads/";
+        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if ($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
         }
-    };
+    }
 
-    xhr.send(formData);
-}
+    // Check if the file already exists in the same path
+    if (file_exists($targetFile)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
-    var fileInput = document.getElementById('imageInput');
-    fileInput.addEventListener('change', uploadImage);
-});
-</script>
+    // Check file size and throw error if it is greater than
+    // the predefined value, here it is 500000
+    if ($_FILES["image"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Check for uploaded file formats and allow only 
+    // jpg, png, jpeg and gif
+    // If you want to allow more formats, declare it here
+    if (
+        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif"
+    ) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    } else {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload and display image in PHP</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="form.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <h2>Upload Image via AJAX</h2>
-    <input type="file" id="imageInput">
+    <div class="phppot-container">
+        <h1>Upload an Image</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <input type="file" name="image" required>
+                <input type="submit" name="submit" value="Upload">
+            </div>
+        </form>
+
+        <h1>Display uploaded Image:</h1>
+        <?php if (isset($_FILES["image"]) && $uploadOk == 1) : ?>
+            <img src="<?php echo $targetFile; ?>" alt="Uploaded Image">
+        <?php endif; ?>
+    </div>
 </body>
+
 </html>

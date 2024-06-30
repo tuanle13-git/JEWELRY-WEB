@@ -107,19 +107,23 @@
                  $c = new db();
                  $sql = "select * from product";
                  $result = $c->querySQL($sql);
+                 $lastid = $c->last_id;
                  
                  while ($row = $result->fetch_assoc()) {
                      echo '<div class="col-4 col-sm-3 col-md-3 col-lg-3 pe-3">
                              <a href="a.php/'.$row["id_product"].'" class="text-decoration-none text-dark">
                                <div class="product"> ';
-                               $sql = "select * from img where id_product='".$row['id_product']."'";
+                               $sql = "select name_metal from metal where id_product'".$row['id_product']."'";
+                               $metallist =  $c->querySQL($sql);
                                
                                echo'
                                  <div class="responsive-square titlebottom">
                                    <img style="object-fit: cover;" class="changingimg h-100 w-100" data-imgchange="" alt="...">
                                  </div>';
 
-
+                                 while ($rows = $metallist->fetch_assoc()) {
+                                  echo $rows['name_metal'];
+                                 }
                                  
                                  echo'
                                  <div class="titleimgbaaotstom bg-white">
