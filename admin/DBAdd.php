@@ -3,7 +3,7 @@
 // Đọc dữ liệu JSON từ body của request
 
 
-include"Connection.PHP";
+include"model/Connection.PHP";
 $c = new db();
 if (isset($_POST['name_catagory'])) {
     // Lấy dữ liệu từ form
@@ -102,47 +102,19 @@ if (isset($_POST['name_stone'])) {
 
 if(isset($_POST['name_product'])) {
     $name_product = $_POST['name_product'];
-    $price = $_POST['price'];
-    $describe_product = $_POST['describe_product'];
     $sex = $_POST['sex'];
-    $id_type = $_POST['id_catagory'];
-    $id_stone = $_POST['id_stone'];
-    $sql = "INSERT INTO `product` (`name_product`, `description`, `sex`, `price`, `id_stone`, `id_catagory`) 
-    VALUES ('$name_product', '$describe_product', '$sex', '$price', '$id_stone', '$id_catagory')";
+    $id_catagory = $_POST['id_catagory'];
+    $sql = "INSERT INTO `product` (`name_product`, `sex`, `id_catagory`) 
+    VALUES ('$name_product', '$sex', '$id_catagory')";
 // Thực thi câu lệnh SQL
     if ($c->querySQL($sql)) {
-         echo "Sản phẩm đã được thêm vào cơ sở dữ liệu thành công.";
+         
     } else {
-        echo "Có lỗi xảy ra khi thêm sản phẩm: " ;
+       
     }
     $id_product = $c->last_id;
 
-    if (isset($_FILES['image']['name'])) {
-    } else {
-        echo "Không có tập tin được tải lên.";
-    }
-    if (!empty($_FILES['image']['name'])) {
-        if (!is_dir('uploads')) {
-            mkdir('uploads', 0755);
-        }
-        $uploadDir = 'uploads/';
-        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            echo "Hình ảnh đã được lưu trữ thành công.";
-        } else {
-            echo "Không thể lưu trữ hình ảnh.";
-        }
-    } else {
-        echo "Vui lòng chọn hình ảnh.";
-    }
-
-
-
-    foreach($_POST['size_product'] as $check) {
-            echo $check; 
-    }
-    $a=$_POST["name_product"];
-    echo" $a";
+    echo $id_product;
 }
 
 

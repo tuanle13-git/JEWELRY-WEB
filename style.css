@@ -36,7 +36,10 @@ margin: 0 !important;
     color : rgb(255, 255, 255);
     
 }
-::before {
+.borderbottom {
+    padding: 0 !important;
+}
+.borderbottom::before {
     content: "";
     position: absolute;
     display: block;
@@ -44,15 +47,16 @@ margin: 0 !important;
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: white;
+    background-color: black;
     transform: scaleX(0);
-    transform-origin: top left;
+    transform-origin: bottom left;
     transition: transform 0.3s ease;
   }
-.titlebottom:hover .titleimgbottom h6::before{
+
+  .borderbottom:hover::before {
     transform: scaleX(1);
-      
-}
+  }
+
 /**/
 .addicon {
     position: absolute;
@@ -102,11 +106,7 @@ margin: 0 !important;
 
     ; /* Khoảng cách giữa các phần tử */
 }
-.product:hover {
-    filter: grayscale(0);
-    transform: scale(1.001);
-    box-shadow: 2px 2px 5px grey, -2px -2px 5px grey;
-  }
+
 .div-img {
     width: 100%; 
     position: relative;

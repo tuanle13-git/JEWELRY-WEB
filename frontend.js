@@ -8,30 +8,17 @@ $(document).ready(function(){
         $(".absolutem ").hide();
       $(".relativem").on({
           mouseenter: function() {
-              var s= ` <div class="row p-3">
-              <div class="col-4">
-                <p><b>Mua sắm theo loại</b></p>
-                <p>Nhẫn cầu hôn</p>
-                <p>Nhẫn cầu hôn</p>
-                <p>Nhẫn cầu hôn</p>
-                <p>Nhẫn cầu hôn</p>
-              </div>
-              <div class="col-4">.col-6</div>
-              <div class="col-4">.col-6</div>
-            </div>
-            
-            <select class="form-select form-select-sm" aria-label="Small select example">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>`;
+              var s= `<ul class="list-group">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+    <li class="list-group-item">A fourth item</li>
+    <li class="list-group-item">And a fifth one</li>
+  </ul>`;
             $(this).find("b").addClass("border-bottom border-dark")
               $(".absolutem ").hide(20);
               $(".absolutem ").show(20);
-              $(".absolutem .row").html( `<div class="col-4">.col-6</div>
-              <div class="col-4">`+ $(this).html()+`</div>
-              <div class="col-4">`+s+`</div>`);
+              
           },
           mouseleave: function() {
             $(this).find("b").removeClass("border-bottom border-dark")
@@ -129,103 +116,36 @@ $(document).ready(function(){
         $(this).parent().find('.scroll-left-btn').show();
     });
     
-   
-      let topInt = $(".fixedtopint1").innerHeight()
-      if (topInt > 0) {
-        $(".fixedtopint2").css("top",topInt+1+"px")
-        $(".absolutem").css("padding-left",$(".needoffset").offset().left + "px")
-      }
+    let topInt = $(".fixedtopint1").innerHeight()
+    if (topInt > 0) {
+      $(".fixedtopint2").css("top",topInt+1+"px")
+     
       
+    }
     
+   
+    
+    // Sử dụng phương thức offset() để lấy vị trí của phần tử trong tài liệu
+
+    
+    // Lấy khoảng cách từ cạnh trái của màn hình đến phần tử
+    var distanceFromLeft = $('#checkleft').offset().left;
+    $('.takeleft').css('padding-left',distanceFromLeft+'px');
+    /// getheight of id
+    console.log(distanceFromLeft);
       /// getheight of id
     
   
       //ajax 
-      $('.formDB').on('submit', function(event){
-        var phpSiteBack = $(this).attr('id')+'.php';
-        console.log(phpSiteBack);
-        event.preventDefault(); // Ngăn chặn form submit truyền thống
-        var formData = new FormData($(this)[1]);
-        var thisp = $(this);
-        // $(this).children().each(function(){
-        //   // Kiểm tra nếu giá trị không rỗng thì thêm vào formData
-        //   if (value !== '') {
-        //     var id = $(this).attr('name');
-        //     if (id && id.includes('[')) return true; //return true là continue trong jquery each false: break
-        //     var value = $(this).val();
-        //     formData[id] = value;
-        //   }
-          
-        // });
-        var selectedSizes = $('input[name="size_product[]"]:checked').map(function() {
-          return this.value;
-      }).get();
-       
-          if (selectedSizes.length > 0) {
-            // Thêm mảng selectedSizes vào formData
-            formData['size_product'] = selectedSizes;
-          }
-  
-          $.ajax({
-              type: "POST",
-             
-              url: phpSiteBack,
-              mimeType: 'multipart/form-data',
-         
-            data: formData,//JSON.stringify(formData),
-            success: function(response){
-                thisp.find('#result').html(response);
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-                $('#result').html('<p style="color: red;">Error: ' + textStatus + ' - ' + errorThrown + '</p>');
-            }
-        });
-        
-       
-    });
-    //ajax listsubstyle
-    $( ".listtype" ).on( "change", function() {
-      var liststyle = $(this).siblings(".liststyle");
-      if (liststyle.length > 0){
-        var id_type = $(this).val();
-        $.ajax({
-          url: 'DBAdd.php',
-          type: 'POST',
-          data: {liststyle: id_type},//JSON.stringify(formData),
-          success: function(response){
-             liststyle.html(response);
-              console.log('aâ'+id_type+response+$("#listload").val() )
-          },
-          error: function(jqXHR, textStatus, errorThrown){
-             liststyle.html('<p style="color: red;">Error: ' + textStatus + ' - ' + errorThrown + '</p>');
-          }
-          
-        });
-      }
-      
-    } );
-  
-    $( ".liststyle" ).on( "change", function() {
-      var listsubstyle = $(this).siblings(".listsubstyle");
-      if (listsubstyle.length > 0){
-        var id_style = $(this).val();
-        $.ajax({
-          url: 'DBAdd.php',
-          type: 'POST',
-          data: {listsubstyle: id_style},//JSON.stringify(formData),
-          success: function(response){
-            listsubstyle.html(response);
-              console.log('aâ'+id_type+response+$("#listload").val() )
-          },
-          error: function(jqXHR, textStatus, errorThrown){
-            listsubstyle.html('<p style="color: red;">Error: ' + textStatus + ' - ' + errorThrown + '</p>');
-          }
-          
-        });
-      }
-      
-    } );
-    $( ".liststyle" ).on( "change", function() {
+     
+    function productrp(){
+      $(".product").find('.product_checkboxz:first').prop( "checked", true ); 
+      $(".product").find('.product_checkboxz:first').each(function(){
+        checkedproduct($(this))
+      })
+    }
+   
+    
   });
   
   

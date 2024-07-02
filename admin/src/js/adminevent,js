@@ -1,0 +1,27 @@
+$(document).ready(function () {
+    $('.formDB .sub_product').on('submit', function (event) {
+        var phpSiteBack = $(this).attr('id') + '.php';
+        console.log(phpSiteBack);
+        event.preventDefault(); // Ngăn chặn form submit truyền thống
+        var formData = new FormData($(this)[0]);
+        var thisp = $(this);
+
+        var formData = new FormData($(this)[0]); // Lấy dữ liệu form
+        $.ajax({
+            url: phpSiteBack, // Đường dẫn tới file xử lý PHP
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $('#result').html(response); // Hiển thị kết quả từ server
+            }
+        });
+        return false;
+
+    });
+    //ajax listsubstyle
+   
+});
